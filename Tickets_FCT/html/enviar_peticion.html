@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Petición</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="validatecookie.js"></script>
+
+<body>
+    <button id="backButton">Volver Atrás</button>
+<script>
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.history.back();
+    });
+</script>
+
+    <div class="container">
+        <h1>Enviar Petición al Profesor</h1>
+        <form action="enviar_peticion.html" method="post">
+            <input type="text" name="sala_id" placeholder="ID de la Sala" required>
+            <textarea name="mensaje" placeholder="Escribe tu mensaje aquí" required></textarea>
+            <button type="submit">Enviar Petición</button>
+        </form>
+    </div>
+    <button id="logoutButton">Logout</button>
+
+    <script>
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            // Eliminar todas las cookies
+            var cookies = document.cookie.split(";");
+    
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+    
+            // Redirigir a index.html
+            window.location.href = 'index.html';
+        });
+    </script>
+
+</body>
+</html>

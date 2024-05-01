@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <link rel="stylesheet" href="style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Sala</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="backButton">Volver Atrás</button>
+<script>
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.history.back();
+    });
+</script>
+
+    <h1>Crear Sala</h1>
+    <form id="crear_sala" action="crear_sala.php" method="post">
+        <input type="text" name="nombre_sala" placeholder="Nombre de la Sala" required>
+        <button type="submit">Crear Sala</button>
+    </form>
+    <script src="validatecookie.js">
+        window.onload = function() {
+    var cookies = document.cookie.split("; ");
+   
+
+    var tipoCookie = cookies.find(function(cookie) {
+        return cookie.split('=')[0] === 'TIPO';
+    });
+
+    if ( !tipoCookie || tipoCookie.split('=')[1] !== 'profesor') {
+        window.location.href = 'index.html';
+    }
+};
+    </script>
+
+    <script>
+        document
+        .getElementById("crear_sala")
+        .addEventListener('submit', function(event) {
+            event.preventDefault();
+            const ID_USER_PROFESOR = 8;  // Este valor deberá ser obtenido según el contexto.
+            const tituloClase = document.querySelector('input[name="nombre_sala"]').value;
+           
+            const url = `http://localhost/TICKETS_FCT/api/create_classroom.php?ID_USER_PROFESOR=${ID_USER_PROFESOR}&titulo=${tituloClase}`;
+            fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+            alert(JSON.stringify(data));
+            window.location.href = 'Dudas_classroom.php';
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+        <button id="logoutButton">Logout</button>
+
+        <script>
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                // Eliminar todas las cookies
+                var cookies = document.cookie.split(";");
+        
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    var eqPos = cookie.indexOf("=");
+                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                }
+        
+                // Redirigir a index.html
+                window.location.href = 'index.html';
+            });
+        </script>
+    
+</body>
+</html>

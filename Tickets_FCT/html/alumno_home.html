@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Alumno</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido Alumno</h1>
+        <div>
+            <a href="ver_salas.html">Unirse a una sala</a>
+            <!-- <a href="enviar_peticion.html">Ver Todas las peticiones</a> -->
+        </div>
+    </div>
+    <button id="logoutButton">Logout</button>
+    <script src="validatecookie.js">
+         window.onload = function() {
+    var cookies = document.cookie.split("; ");
+   
+
+    var tipoCookie = cookies.find(function(cookie) {
+        return cookie.split('=')[0] === 'TIPO';
+    });
+
+    if ( !tipoCookie && tipoCookie.split('=')[1] != 'alumno') {
+        window.location.href = 'index.html';
+    }
+};
+    </script>
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        // Eliminar todas las cookies
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+
+        // Redirigir a index.html
+        window.location.href = 'index.html';
+    });
+</script>
+</body>
+</html>

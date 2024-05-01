@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+    <link rel="stylesheet" href="style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Salas</title>
+    <link rel="stylesheet" href="css/form_duda.css">
+</head>
+<script src="validatecookie.js">
+    window.onload = function() {
+    var cookies = document.cookie.split("; ");
+   
+
+    var tipoCookie = cookies.find(function(cookie) {
+        return cookie.split('=')[0] === 'TIPO';
+    });
+
+    if ( !tipoCookie || tipoCookie.split('=')[1] !== 'alumno') {
+        window.location.href = 'index.html';
+    }
+};
+</script>
+
+<body>
+    <button id="backButton">Volver Atrás</button>
+<script>
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.history.back();
+    });
+</script>
+
+    <button id="logoutButton">Logout</button>
+
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        // Eliminar todas las cookies
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+
+        // Redirigir a index.html
+        window.location.href = 'index.html';
+    });
+</script>
+    <h1>Consultar Sala</h1>
+    <form id="classroomForm">
+        <label for="classroomId">ID de la Sala:</label>
+        <input type="text" id="classroomId" name="classroomId">
+        <input type="submit" value="Consultar">
+    </form>
+    <!-- <div id="classroomInfo"></div> -->
+    <script>
+        document
+        .getElementById("classroomForm")
+        .addEventListener('submit', function(event) {
+                event.preventDefault();
+                const classroomId = document.getElementById("classroomId").value;
+                window.location.href = 'Dudas_classroom.php';
+
+                const url = `http://localhost/TICKETS_FCT/api/get_classroom_by_id.php?id=${classroomId}`;
+                fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.message === "Sala encontrada") {
+                    document.cookie = `classroomId=${classroomId}`;
+                    window.location.href = 'Dudas_classroom.php';
+
+                } else {
+                    alert("Id de sala incorrecta");
+                }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>

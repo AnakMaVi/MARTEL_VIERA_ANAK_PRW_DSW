@@ -1,0 +1,202 @@
+/* Importación de fuente y reset de estilos */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+}
+
+.container {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    padding: 40px; /* Aumentado para más espacio interno */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px; /* Aumentado para más espacio entre contenedores */
+}
+
+h1, h2, h3, p {
+    color: #5a5a5a;
+    margin: 20px 0; /* Espaciado vertical entre encabezados y párrafos */
+}
+
+/* Mejoras para formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Aumentado para más espacio entre campos de formulario */
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea,
+button {
+    padding: 15px; /* Aumentado para más comodidad en la entrada */
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: calc(100% - 30px); /* Ajuste para el padding incrementado */
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #0056b3;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 15px; /* Espaciado entre enlaces */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0; /* Espaciado alrededor de las tablas */
+}
+
+th, td {
+    text-align: left;
+    padding: 15px; /* Aumentado para más espacio dentro de celdas */
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 20px; /* Espacio reducido para dispositivos pequeños */
+    }
+
+    form {
+        width: 100%;
+    }
+
+    table, th, td {
+        display: block;
+        text-align: right;
+        padding-left: 50%; /* Espacio para contenido de celda en modo responsivo */
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+/* Estilo global y posición del botón de logout */
+#logoutButton {
+    position: fixed; /* Posicionamiento fijo en la pantalla */
+    top: 20px; /* Espaciado desde el top */
+    right: 20px; /* Espaciado desde la derecha */
+    padding: 10px 20px; /* Padding para hacer el botón más grande y cómodo */
+    width: auto; /* Anchura automática basada en el contenido */
+    max-width: 150px; /* Máximo ancho del botón para evitar que sea demasiado grande */
+    background-color: #dc3545; /* Color de fondo para el botón de logout, rojo para indicar acción de cierre */
+    color: white; /* Texto en color blanco para contraste */
+    border: none; /* Sin borde para un diseño más limpio */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano al pasar el ratón */
+    z-index: 1000; /* Asegurarse de que el botón esté sobre otros elementos */
+    transition: background-color 0.3s, transform 0.2s; /* Transición suave para hover */
+}
+
+#logoutButton:hover {
+    background-color: #c82333; /* Color de hover más oscuro */
+    transform: scale(1.1); /* Efecto de crecimiento al pasar el ratón */
+}
+
+/* Estilo para el botón de refrescar */
+#refreshButton {
+    position: fixed; /* Posicionamiento fijo en la pantalla */
+    top: 20px; /* Espaciado desde el top */
+    right: 20px; /* Espaciado desde la derecha */
+    padding: 10px 20px; /* Padding para hacer el botón más grande y cómodo */
+    width: auto; /* Anchura automática basada en el contenido */
+    max-width: 150px; /* Máximo ancho del botón para evitar que sea demasiado grande */
+    padding: 10px 20px; /* Mismo padding que logout para igual grosor */
+    background-color: #007bff; /* Estilo coherente con otros botones */
+    color: white; /* Texto en color blanco para contraste */
+    border: none; /* Sin borde para un diseño más limpio */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano al pasar el ratón */
+    z-index: 1000; /* Asegurarse de que el botón esté sobre otros elementos */
+    transition: background-color 0.3s, transform 0.2s; /* Transición suave para hover */
+}
+
+#refreshButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+
+#backButton {
+    position: fixed; /* Posicionamiento fijo en la pantalla */
+    top: 20px; /* Espaciado desde la parte superior */
+    left: 20px; /* Espaciado desde la izquierda */
+    max-width: 150px; /* Ancho máximo del botón para evitar que sea demasiado grande */
+    padding: 10px 15px; /* Padding suficiente para hacer el botón accesible pero no muy grande */
+    background-color: #6c757d; /* Color gris para diferenciarlo */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000; /* Asegurarse de que el botón esté visible sobre otros elementos */
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: #5a6268; /* Oscurecer el botón al pasar el mouse sobre él */
+}

@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <link rel="stylesheet" href="style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="login">
+            <input id="username" type="text" name="username" placeholder="Nombre de usuario" required>
+            <input id="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+    </div>
+    <script>
+        document
+        .getElementById("login")
+        .addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+    
+            const url = `http://localhost/TICKETS_FCT/api/loginuser.php?NOMBRE=${username}&PASSWORD=${password}`;
+            fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.message === "Login correcto") {
+                    window.location.href = data.url;
+                } else {
+                    alert("Nombre de usuario o contraseña incorrectos");
+                }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+    </script>
+</body>
+</html>

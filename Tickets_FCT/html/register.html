@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script src="validatecookie.js"></script>
+
+  <body>
+    <button id="backButton">Volver Atrás</button>
+<script>
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.history.back();
+    });
+</script>
+
+    <div class="container">
+      <h1>Crear Nuevo Usuario</h1>
+      <form id="userForm">
+        <input type="text" id="nombre" placeholder="Nombre" required />
+       
+        <input
+          type="password"
+          id="password"
+          placeholder="Contraseña"
+          required
+        />
+        <select id="tipo">
+          <option value="alumno">Alumno</option>
+          <option value="profesor">Profesor</option>
+        </select>
+        <button type="submit">Registrar Usuario</button>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("userForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const nombre = document.getElementById("nombre").value;
+          const sitioClase = null;
+          const password = document.getElementById("password").value;
+          const tipo = document.getElementById("tipo").value;
+
+          const url = `http://localhost/TICKETS_FCT/api/createuser.php?NOMBRE=${nombre}&SITIOCLASE=${sitioClase}&PASSWORD=${password}&TIPO=${tipo}`;
+          fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => alert(JSON.stringify(data)))
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>
